@@ -1,12 +1,15 @@
 {
   "name": "hugo-site-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Speed up generation of hugo sites",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "start": "./node_modules/.bin/ts-node ./index.ts",
     "build": "./node_modules/.bin/tsc -p ./tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "hugo-generate": "dist/index.js"
   },
   "author": "Dawid Sowa",
   "license": "ISC",
