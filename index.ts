@@ -35,7 +35,15 @@ export const generateSite = (site: string, repo: string, theme: string) => {
 export const copyDefaults = (site: string, theme: string) => {
     ncp(`${site}/themes/${theme}/exampleSite`, `${site}`, (err) => {
         if (err) {
-            return console.error(err)
+            console.warn('Not found /exampleSite folder. Copy whole git repo into main folder.')
+            ncp(`${site}/themes/${theme}`, `${site}`, {
+                filter: (fileName) => !([
+                    '.git',
+                    'README.md'
+                ].includes(fileName))
+            }, (err) => {
+                return console.error('Failed', err)
+            });
         }
 
         console.log('Data from /exampleSite copied');
