@@ -1,6 +1,6 @@
 {
   "name": "hugo-site-generator",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Speed up generation of hugo sites",
   "main": "dist/index.js",
   "scripts": {
@@ -11,12 +11,17 @@
   "bin": {
     "hugo-generate": "dist/index.js"
   },
+  "preferGlobal": true,
   "author": "Dawid Sowa",
   "license": "ISC",
+  "bundledDependencies": [
+    "ncp"
+  ],
+  "dependencies": {
+    "ncp": "^2.0.0"
+  },
   "devDependencies": {
-    "@types/ncp": "^2.0.3",
     "@types/node": "^13.9.1",
-    "ncp": "^2.0.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
   }
