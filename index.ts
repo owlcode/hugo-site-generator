@@ -14,12 +14,19 @@ const rl = readline.createInterface({
 });
 
 rl.question(gettext("New site name: "), (SITE_NAME: string) => {
-    rl.question("Theme to be downloaded: ", (THEME: string) => {
-        rl.question("Theme's Git repository: ", (THEME_REPO: string) => {
+    rl.question("Theme's Git repository: ", (THEME_REPO: string) => {
+        const THEME = THEME_REPO.split('/').pop()?.split('.')[0];
+        if (THEME) {
             rl.close();
             generateSite(SITE_NAME, THEME_REPO, THEME);
             copyDefaults(SITE_NAME, THEME)
-        })
+        } else {
+            rl.question("Theme's name: ", (name: string) => {
+                rl.close();
+                generateSite(SITE_NAME, THEME_REPO, name);
+                copyDefaults(SITE_NAME, name)
+            });
+        } 
     });
 });
 
@@ -30,6 +37,7 @@ export const generateSite = (site: string, repo: string, theme: string) => {
     execSync(`hugo new site ${site}`);
     execSync(`cd ${site} && git init`);
     execSync(`cd ${site} && git submodule add ${repo} themes/${theme}`);
+    execSync(`cd ${site} && git add * && git commit -m 'Initial commit for ${site}'`);
 };
 
 export const copyDefaults = (site: string, theme: string) => {
