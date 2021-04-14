@@ -6,6 +6,8 @@ Quickly generate new Hugo site with theme pre-download
 * `npm i -g hugo`
 * `npm i -g hugo-site-generator`
 * `hugo-generate`
-    * Answer quesions, theme name to be taken from Hugo Themes
+    * Answer quesions
+    * New site name: will be used as directory name for site generation
+    * Theme's Git repository: URL to github theme project 
 * `cd <theme_name>`
 * `hugo server -D`
