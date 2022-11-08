@@ -76,9 +76,14 @@ export const copyDefaults = (site: string, theme: string) => {
                 console.log(".gitignore file generated");
             }
             
-            execSync(`git add * && git commit -m 'Initial commit for ${site}'`, {
-                cwd: site
-            });
+            try {
+                execSync(`git add * && git commit -m 'Initial commit for ${site}'`, {
+                    cwd: site
+                });
+            } catch( e) {
+                console.warn('Failed adding files to git, continue...')
+            }
+            
             process.exit(0);
         }); 
 
@@ -160,7 +165,6 @@ out
 .nuxt
 dist
 .cache/
-public
 .vscode-test
 .yarn/cache
 .yarn/unplugged
